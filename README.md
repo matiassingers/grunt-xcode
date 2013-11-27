@@ -1,4 +1,4 @@
-# grunt-xcode
+# grunt-xcode [![Build Status](https://travis-ci.org/matiassingers/grunt-xcode.png?branch=master)](https://travis-ci.org/matiassingers/grunt-xcode)
 
 > Compile and build Xcode project with Grunt
 
