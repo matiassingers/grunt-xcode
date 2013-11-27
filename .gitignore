@@ -1,0 +1,25 @@
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# OS X
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.Spotlight-V100
+.Trashes
+
+# Dropbox
+.BackupManager
+.BackupManager/*
+
+# Sublime Text
+*.sublime-*
+
+node_modules
+npm-debug.log
+tmp
