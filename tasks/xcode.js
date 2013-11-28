@@ -30,25 +30,36 @@ module.exports = function(grunt) {
         });
 
     function init(){
-      child();
+      gemCheck();
 
       return deferred.promise;
     }
 
-    init().then(function(message){
+    function onInitComplete(message){
       if(message){
         grunt.verbose.writeln(message);
       }
       done();
-    }, function(message){
-      if(message){
+    }
+
+    function onInitError(message, severity){
+      // Takes 'warn' and 'fatal'
+      if(severity){
+        grunt.fail[severity](message);
+      } else if(message){
         grunt.log.errorlns(message);
       }
       done(false);
+    }
+
+    init().then(function(message){
+      onInitComplete(message);
+    }, function(message, severity){
+      onInitError(message, severity);
     });
 
     // Check if required gem is installed
-    function child(){
+    function gemCheck(){
       grunt.verbose.writeln('Checking if {0} gem is installed'.format(gem));
       exec('gem list {0} -i'.format(gem), function(error, stdout, stderr){
         if (error !== null) {
