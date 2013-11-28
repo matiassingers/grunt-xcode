@@ -41,5 +41,8 @@
     "gruntplugin",
     "xcode",
     "shenzhen"
-  ]
+  ],
+  "dependencies": {
+    "inquirer": "~0.3.5"
+  }
 }
