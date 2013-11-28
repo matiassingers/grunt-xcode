@@ -21,11 +21,7 @@ var q = require('q'),
     exec = require('child_process').exec;
 
 module.exports = function(grunt) {
-  // Please see the Grunt documentation for more information regarding task
-  // creation: http://gruntjs.com/creating-tasks
-
   grunt.registerMultiTask('xcode', 'Compile and build Xcode project with Grunt', function() {
-    // Merge task-specific and/or target-specific options with these defaults.
     var done = this.async(),
         deferred = q.defer(),
         gem = 'shenzhen',
@@ -82,7 +78,7 @@ module.exports = function(grunt) {
 
       inquirer.prompt(confirmOptions, function(answers){
         if(!answers.install){
-          return deferred.reject('You need to install the {0} gem for this Grunt task to work.'.format(gem));
+          grunt.fail.fatal('You need to install the {0} gem for this Grunt task to work.'.format(gem));
         }
 
         executeCommand('gem install ' + gem);
@@ -95,11 +91,11 @@ module.exports = function(grunt) {
       grunt.verbose.writeln('Executing: ' + cmd);
 
       exec(cmd, function(error, stdout, stderr){
-        if(error !== null){
-          return deferred.reject('The following error occured: ' + stderr);
-        } else if(stderr.indexOf('have write permissions') !== -1){
+        if(stderr.indexOf('have write permissions') !== -1){
           grunt.log.errorlns('It seems that you don\'t have write permissions for this directory. Please type your root password below:');
           return executeCommand(cmd, true);
+        } else if(error !== null){
+          return deferred.reject('The following error occured: ' + stderr);
         }
         
         // Next step here ...
