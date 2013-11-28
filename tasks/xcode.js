@@ -16,7 +16,8 @@ String.prototype.format = function () {
     return formatted;
 };
 
-var inquirer = require('inquirer'),
+var q = require('q'),
+    inquirer = require('inquirer'),
     exec = require('child_process').exec;
 
 module.exports = function(grunt) {
@@ -25,23 +26,45 @@ module.exports = function(grunt) {
 
   grunt.registerMultiTask('xcode', 'Compile and build Xcode project with Grunt', function() {
     // Merge task-specific and/or target-specific options with these defaults.
-    var cb = this.async(),
+    var done = this.async(),
+        deferred = q.defer(),
         gem = 'shenzhen',
         options = this.options({
           gemInstall: false
         });
 
-    // Check if required gem is installed
-    grunt.verbose.writeln('Checking if {0} gem is installed'.format(gem));
-    var child = exec('gem list {0} -i'.format(gem), function(error, stdout, stderr){
-      if (error !== null) {
-        grunt.verbose.error('{0} gem is not installed, prompting for install'.format(gem));
-        return promptInstall();
-      }
+    function init(){
+      child();
 
-      grunt.verbose.writeln('{0} is installed, continuing task...'.format(gem));
-      cb();
+      return deferred.promise;
+    }
+
+    init().then(function(message){
+      if(message){
+        grunt.verbose.writeln(message);
+      }
+      done();
+    }, function(message){
+      if(message){
+        grunt.log.errorlns(message);
+      }
+      done(false);
     });
+
+    // Check if required gem is installed
+    function child(){
+      grunt.verbose.writeln('Checking if {0} gem is installed'.format(gem));
+      exec('gem list {0} -i'.format(gem), function(error, stdout, stderr){
+        if (error !== null) {
+          grunt.verbose.error('{0} gem is not installed, prompting for install'.format(gem));
+          return promptInstall();
+        }
+
+        grunt.verbose.writeln('{0} is installed, continuing task...'.format(gem));
+        // Go to the next step here ...
+        deferred.resolve();
+      });
+    }
 
     // Prompt the user for the installation of the gem in case it isn't installed yet
     function promptInstall(){
@@ -51,40 +74,38 @@ module.exports = function(grunt) {
       }
 
       var confirmOptions = {
-        type: 'confirm', 
-        name: 'install', 
-        message: 'The {0} gem is required for grunt-xcode to work, do you wish to install it?'.format(gem), 
+        type: 'confirm',
+        name: 'install',
+        message: 'The {0} gem is required for grunt-xcode to work, do you wish to install it?'.format(gem),
         default: true
-      }
+      };
 
       inquirer.prompt(confirmOptions, function(answers){
         if(!answers.install){
-          grunt.log.error('You need to install the {0} gem for this Grunt task to work.'.format(gem));
-          return cb(false);
+          return deferred.reject('You need to install the {0} gem for this Grunt task to work.'.format(gem));
         }
 
         executeCommand('gem install ' + gem);
       });
-    };
+    }
 
     // Execute the supplied command, optionally as root
     function executeCommand(cmd, root){
-      var cmd = root ? 'sudo ' + cmd : cmd;
+      cmd = root ? 'sudo ' + cmd : cmd;
       grunt.verbose.writeln('Executing: ' + cmd);
 
       exec(cmd, function(error, stdout, stderr){
         if(error !== null){
-          grunt.log.errorlns('The following error occured: ' + stderr);
-          return cb(false);
+          return deferred.reject('The following error occured: ' + stderr);
         } else if(stderr.indexOf('have write permissions') !== -1){
           grunt.log.errorlns('It seems that you don\'t have write permissions for this directory. Please type your root password below:');
           return executeCommand(cmd, true);
         }
         
-        grunt.verbose.writeln(stdout);
-        cb();
+        // Next step here ...
+        deferred.resolve(stdout);
       });
-    };
+    }
 
   });
 };
