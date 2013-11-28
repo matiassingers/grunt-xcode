@@ -58,12 +58,12 @@ module.exports = function(grunt) {
       }
 
       inquirer.prompt(confirmOptions, function(answers){
-        if(answers.install){
-          return executeCommand('gem install ' + gem);
+        if(!answers.install){
+          grunt.log.error('You need to install the {0} gem for this Grunt task to work.'.format(gem));
+          return cb(false);
         }
 
-        grunt.log.error('You need to install the ' + gem + ' gem for this Grunt task to work.');
-        cb(false);
+        executeCommand('gem install ' + gem);
       });
     };
 
@@ -73,16 +73,16 @@ module.exports = function(grunt) {
       grunt.verbose.writeln('Executing: ' + cmd);
 
       exec(cmd, function(error, stdout, stderr){
-        if(error === null){
-          grunt.verbose.writeln(stdout);
-          return cb();
+        if(error !== null){
+          grunt.log.errorlns('The following error occured: ' + stderr);
+          return cb(false);
         } else if(stderr.indexOf('have write permissions') !== -1){
           grunt.log.errorlns('It seems that you don\'t have write permissions for this directory. Please type your root password below:');
           return executeCommand(cmd, true);
         }
-
-        grunt.log.errorlns('The following error occured: ' + stderr);
-        cb(false);
+        
+        grunt.verbose.writeln(stdout);
+        cb();
       });
     };
 
