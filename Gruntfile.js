@@ -32,6 +32,7 @@ module.exports = function(grunt) {
     xcode: {
       default: {
         options: {
+          gemInstall: false
         }
       }
     },
