@@ -89,7 +89,7 @@ module.exports = function(grunt) {
 
       inquirer.prompt(confirmOptions, function(answers){
         if(!answers.install){
-          grunt.fail.fatal('You need to install the {0} gem for this Grunt task to work.'.format(gem));
+          return deferred.reject('You need to install the {0} gem for this Grunt task to work.'.format(gem), 'fatal');
         }
 
         executeCommand('gem install ' + gem);
@@ -106,7 +106,7 @@ module.exports = function(grunt) {
           grunt.log.errorlns('It seems that you don\'t have write permissions for this directory. Please type your root password below:');
           return executeCommand(cmd, true);
         } else if(error !== null){
-          return deferred.reject('The following error occured: ' + stderr);
+          return deferred.reject(stderr);
         }
         
         // Next step here ...
