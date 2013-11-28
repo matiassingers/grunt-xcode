@@ -38,6 +38,8 @@
     "grunt": "~0.4.2"
   },
   "keywords": [
-    "gruntplugin"
+    "gruntplugin",
+    "xcode",
+    "shenzhen"
   ]
 }
