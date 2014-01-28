@@ -30,8 +30,6 @@
   },
   "devDependencies": {
     "grunt-contrib-jshint": "~0.6.0",
-    "grunt-contrib-clean": "~0.4.0",
-    "grunt-contrib-nodeunit": "~0.2.0",
     "grunt": "~0.4.2"
   },
   "peerDependencies": {
@@ -41,5 +39,9 @@
     "gruntplugin",
     "xcode",
     "shenzhen"
-  ]
+  ],
+  "dependencies": {
+    "inquirer": "~0.3.5",
+    "q": "~0.9.7"
+  }
 }
