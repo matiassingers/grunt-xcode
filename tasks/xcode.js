@@ -26,8 +26,35 @@ module.exports = function(grunt) {
         deferred = q.defer(),
         gem = 'shenzhen',
         options = this.options({
-          gemInstall: false
+          gemInstall: false,
+          workspace: '',
+          project: '',
+          configuration: '',
+          scheme: '',
+          clean: true,
+          archive: true,
+          destination: '',
+          provision: '',
+          identity: '',
+          sdk: ''
         });
+
+    function buildCommand(){
+      var cmd = 'ipa build';
+
+      if(options.workspace) cmd += ' --workspace {0}'.format(options.workspace);
+      if(options.project) cmd += ' --project {0}'.format(options.project);
+      if(options.configuration) cmd += ' --configuration {0}'.format(options.configuration);
+      if(options.scheme) cmd += ' --scheme {0}'.format(options.scheme);
+      if(!options.clean) cmd += ' --no-clean';
+      if(!options.archive) cmd += ' --no-archive';
+      if(options.destination) cmd += ' --destination {0}'.format(options.destination);
+      if(options.provision) cmd += ' --provision {0}'.format(options.provision);
+      if(options.identity) cmd += ' --identity {0}'.format(options.identity);
+      if(options.sdk) cmd += ' --sdk {0}'.format(options.sdk);
+
+      return cmd;
+    }
 
     function init(){
       gemCheck();
@@ -39,7 +66,26 @@ module.exports = function(grunt) {
       if(message){
         grunt.verbose.writeln(message);
       }
-      done();
+
+      var cmd = buildCommand();
+      grunt.verbose.writeln('Executing the build command: {0}'.format(cmd));
+      exec(cmd, function(error, stdout, stderr){
+        if(error){
+          grunt.log.errorlns(error);
+          done(false);
+        }
+
+        if(stderr){
+          grunt.log.errorlns(stderr);
+          done(false);
+        }
+
+        if(stdout.indexOf('successfully built') !== -1){
+          grunt.verbose.writeln(stdout);
+          grunt.verbose.writeln('The build succeeded and the file was saved');
+          done();
+        }
+      });
     }
 
     function onInitError(message, severity){
