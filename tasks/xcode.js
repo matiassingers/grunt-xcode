@@ -52,11 +52,8 @@ module.exports = function(grunt) {
       done(false);
     }
 
-    init().then(function(message){
-      onInitComplete(message);
-    }, function(message, severity){
-      onInitError(message, severity);
-    });
+    // TODO: don't pass the same promise around
+    init().then(onInitComplete, onInitError);
 
     // Check if required gem is installed
     function gemCheck(){
