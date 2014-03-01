@@ -100,10 +100,17 @@ module.exports = function(grunt) {
 
       exec(cmd, function(error, stdout, stderr){
         if(stderr.indexOf('have write permissions') !== -1){
-          grunt.log.errorlns('It seems that you don\'t have write permissions for this directory. Please type your root password below:');
+          grunt.log.errorlns('It seems that you don\'t have write permissions for this directory. Executing as root, you may be required to type your root password below:');
           return executeCommand(cmd, true);
+        } else if(stderr.indexOf('multipart-post (~> 1.2.0)') !== -1){
+          grunt.log.errorlns('An error occured with a Ruby dependency, trying to resolve the issue');
+          return exec('gem install multipart-post -v 1.2.0', function(error, stdout, stderr){
+            if(!error){
+              return executeCommand(cmd, true);
+            }
+          });
         } else if(error !== null){
-          return deferred.reject(stderr);
+          return deferred.reject(stderr, 'fatal');
         }
         
         // Next step here ...
