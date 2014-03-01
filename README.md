@@ -29,6 +29,76 @@ Type: `Boolean`
 
 Force the installation of the required gem without asking the user first.
 
+#### workspace
+
+Default: `''`  
+Type: `String`
+
+Workspace (.xcworkspace) file to use to build app (automatically detected in current directory)
+
+#### project
+
+Default: `''`  
+Type: `String`
+
+Project (.xcodeproj) file to use to build app (automatically detected in current directory, overridden by `workspace` option)
+
+#### configuration
+
+Default: `''`  
+Type: `String`
+
+Configuration used to build('Debug' or 'Release' in most projects)
+
+#### scheme
+
+Default: `''`  
+Type: `String`
+
+Scheme used to build app
+
+#### clean
+
+Default: `true`  
+Type: `Boolean`
+
+Clean project before building
+
+#### archive
+
+Default: `true`  
+Type: `Boolean`
+
+Archive project after building
+
+#### destination
+
+Default: `''`  
+Type: `String`
+
+Destination. Defaults to current directory
+
+#### provision
+
+Default: `''`  
+Type: `String`
+
+Sign .ipa file with .mobileprovision
+
+#### identity
+
+Default: `''`  
+Type: `String`
+
+Identity to be used along with --embed
+
+#### sdk
+
+Default: `''`  
+Type: `String`
+
+use SDK as the name or path of the base SDK when building the project
+
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
