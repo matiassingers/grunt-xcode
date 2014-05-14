@@ -1,7 +1,7 @@
 {
   "name": "grunt-xcode",
-  "description": "Compile and build Xcode project with Grunt",
-  "version": "0.0.1",
+  "description": "WIP: Compile and build Xcode project with Grunt",
+  "version": "0.0.2",
   "homepage": "https://github.com/matiassingers/grunt-xcode",
   "author": {
     "name": "Matias Singers",
@@ -36,8 +36,10 @@
     "grunt": "~0.4.2"
   },
   "keywords": [
+    "grunt",
     "gruntplugin",
     "xcode",
+    "iOS",
     "shenzhen"
   ],
   "dependencies": {
