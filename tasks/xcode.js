@@ -35,6 +35,7 @@ module.exports = function(grunt) {
           archive: true,
           destination: '',
           provision: '',
+          embed: '',
           identity: '',
           sdk: ''
         });
@@ -50,6 +51,7 @@ module.exports = function(grunt) {
       if(!options.archive) cmd += ' --no-archive';
       if(options.destination) cmd += ' --destination {0}'.format(options.destination);
       if(options.provision) cmd += ' --provision {0}'.format(options.provision);
+      if(options.embed) cmd += ' --embed {0}'.format(options.embed);
       if(options.identity) cmd += ' --identity {0}'.format(options.identity);
       if(options.sdk) cmd += ' --sdk {0}'.format(options.sdk);
 
