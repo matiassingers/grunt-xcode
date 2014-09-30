@@ -111,6 +111,8 @@ module.exports = function(grunt) {
       if(options.export){
         grunt.log.ok('Built and exported product to: {0}/{1}'.format(options.exportPath, options.exportFilename));
       }
+
+      done();
     }
   });
 };
