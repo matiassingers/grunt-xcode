@@ -2,7 +2,7 @@
  * grunt-xcode
  * https://github.com/matiassingers/grunt-xcode
  *
- * Copyright (c) 2013 Matias Singers
+ * Copyright (c) 2014 Matias Singers
  * Licensed under the MIT license.
  */
 
@@ -18,18 +18,19 @@ module.exports = function(grunt) {
         'tasks/*.js'
       ],
       options: {
-        jshintrc: '.jshintrc',
-      },
+        jshintrc: '.jshintrc'
+      }
     },
 
     // Configuration to be run (and then tested).
     xcode: {
       default: {
         options: {
-          gemInstall: false
+          project: './xcode/test.xcodeproj',
+          scheme: 'Test'
         }
       }
-    },
+    }
   });
 
   // Actually load this plugin's task(s).
