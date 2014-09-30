@@ -80,5 +80,23 @@ module.exports = function(grunt) {
           grunt.verbose.ok('`xcodebuild archive` was successful');
         });
     }
+    function runExportCommand(){
+      if(!options.export) {
+        return Promise.resolve();
+      }
+
+      var command = 'xcodebuild';
+      command += ' -exportArchive';
+      command += ' -exportFormat ipa';
+      command += ' -project "{0}"'.format(options.project);
+      command += ' -archivePath "{0}.xcarchive"'.format(options.archivePath);
+      command += ' -exportPath "{0}/{1}"'.format(options.exportPath, options.exportFilename);
+      command += ' -exportWithOriginalSigningIdentity';
+
+      executeCommand(command)
+        .then(function(){
+          grunt.verbose.ok('`xcodebuild export` was successful');
+        });
+    }
   });
 };
