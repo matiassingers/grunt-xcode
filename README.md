@@ -1,4 +1,4 @@
-# grunt-xcode [![Build Status](https://travis-ci.org/matiassingers/grunt-xcode.png?branch=master)](https://travis-ci.org/matiassingers/grunt-xcode) [![Dependency Status](https://gemnasium.com/matiassingers/grunt-xcode.png)](https://gemnasium.com/matiassingers/grunt-xcode)
+# grunt-xcode [![Build Status](http://img.shields.io/travis/matiassingers/grunt-xcode.svg?style=flat-square)](https://travis-ci.org/matiassingers/grunt-xcode) [![Dependency Status](http://img.shields.io/gemnasium/matiassingers/grunt-xcode.svg?style=flat-square)](https://gemnasium.com/matiassingers/grunt-xcode)
 > Build and export Xcode projects with Grunt
 
 ## Getting Started
