@@ -20,7 +20,7 @@
     "test": "grunt test -v"
   },
   "devDependencies": {
-    "grunt-contrib-jshint": "~0.6.0",
+    "grunt-contrib-jshint": "~0.10.0",
     "grunt": "~0.4.5"
   },
   "peerDependencies": {
