@@ -65,5 +65,20 @@ module.exports = function(grunt) {
           grunt.verbose.ok('`xcodebuild clean` was successful');
         });
     }
+    function runArchiveCommand(){
+      if(!options.export) {
+        return Promise.resolve();
+      }
+
+      var command = 'xcodebuild archive';
+      command += ' -project "{0}"'.format(options.project);
+      command += ' -scheme "{0}"'.format(options.scheme);
+      command += ' -archivePath "{0}"'.format(options.archivePath);
+
+      return executeCommand(command)
+        .then(function(){
+          grunt.verbose.ok('`xcodebuild archive` was successful');
+        });
+    }
   });
 };
