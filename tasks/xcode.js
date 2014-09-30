@@ -54,6 +54,11 @@ module.exports = function(grunt) {
       options.archivePath = temporaryDirectory.path;
     }
 
+    runCleanCommand()
+      .then(runArchiveCommand)
+      .then(runExportCommand)
+      .finally(cleanUp);
+
     function runCleanCommand(){
       if(!options.clean){
         return Promise.resolve();
@@ -97,6 +102,15 @@ module.exports = function(grunt) {
         .then(function(){
           grunt.verbose.ok('`xcodebuild export` was successful');
         });
+    }
+    function cleanUp(){
+      if(temporaryDirectory){
+        temporaryDirectory.rmdir();
+      }
+
+      if(options.export){
+        grunt.log.ok('Built and exported product to: {0}/{1}'.format(options.exportPath, options.exportFilename));
+      }
     }
   });
 };
