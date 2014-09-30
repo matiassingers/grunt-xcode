@@ -53,5 +53,17 @@ module.exports = function(grunt) {
       var temporaryDirectory = new temporary.Dir();
       options.archivePath = temporaryDirectory.path;
     }
+
+    function runCleanCommand(){
+      if(!options.clean){
+        return Promise.resolve();
+      }
+
+      var command = 'xcodebuild clean -project "{0}"'.format(options.project);
+      return executeCommand(command)
+        .then(function(){
+          grunt.verbose.ok('`xcodebuild clean` was successful');
+        });
+    }
   });
 };
