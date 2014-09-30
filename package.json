@@ -1,7 +1,7 @@
 {
   "name": "grunt-xcode",
   "description": "Build and export Xcode projects with Grunt",
-  "version": "0.0.2",
+  "version": "2.0.0",
   "homepage": "https://github.com/matiassingers/grunt-xcode",
   "author": "Matias Singers <mail@matiassingers.com> (http://mts.io)",
   "repository": {
