@@ -7,6 +7,8 @@
  */
 'use strict';
 
+var Promise = require('bluebird');
+var exec = Promise.promisify(require('child_process').exec);
 module.exports = function(grunt) {
   grunt.registerMultiTask('xcode', 'Build and export Xcode projects with Grunt', function() {
     var done = this.async();

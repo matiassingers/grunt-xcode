@@ -33,7 +33,6 @@
     "iOS"
   ],
   "dependencies": {
-    "inquirer": "~0.3.5",
-    "q": "~0.9.7"
+    "bluebird": "~2.3.4"
   }
 }
