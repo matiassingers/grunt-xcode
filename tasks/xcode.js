@@ -75,12 +75,12 @@ module.exports = function(grunt) {
         return Promise.resolve();
       }
 
-      var command = 'xcodebuild archive';
-      command += ' -project "{0}"'.format(options.project);
-      command += ' -scheme "{0}"'.format(options.scheme);
-      command += ' -archivePath "{0}"'.format(options.archivePath);
+      var command = ['xcodebuild archive'];
+      command.push('-project "{0}"'.format(options.project));
+      command.push('-scheme "{0}"'.format(options.scheme));
+      command.push('-archivePath "{0}"'.format(options.archivePath));
 
-      return executeCommand(command)
+      return executeCommand(command.join(' '))
         .then(function(){
           grunt.verbose.ok('`xcodebuild archive` was successful');
         });
@@ -90,15 +90,15 @@ module.exports = function(grunt) {
         return Promise.resolve();
       }
 
-      var command = 'xcodebuild';
-      command += ' -exportArchive';
-      command += ' -exportFormat ipa';
-      command += ' -project "{0}"'.format(options.project);
-      command += ' -archivePath "{0}.xcarchive"'.format(options.archivePath);
-      command += ' -exportPath "{0}/{1}"'.format(options.exportPath, options.exportFilename);
-      command += ' -exportWithOriginalSigningIdentity';
+      var command = ['xcodebuild'];
+      command.push('-exportArchive');
+      command.push('-exportFormat ipa');
+      command.push('-project "{0}"'.format(options.project));
+      command.push('-archivePath "{0}.xcarchive"'.format(options.archivePath));
+      command.push('-exportPath "{0}/{1}"'.format(options.exportPath, options.exportFilename));
+      command.push('-exportWithOriginalSigningIdentity');
 
-      executeCommand(command)
+      executeCommand(command.join(' '))
         .then(function(){
           grunt.verbose.ok('`xcodebuild export` was successful');
         });
