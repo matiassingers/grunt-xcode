@@ -23,7 +23,7 @@ String.prototype.format = function() {
 module.exports = function(grunt) {
   function executeCommand(command){
     grunt.verbose.writeln('Running command: {0}'.format(command));
-    return exec(command)
+    return exec(command, {maxBuffer: 1000*1024})
       .catch(handleCommandError);
   }
   function handleCommandError(error){
