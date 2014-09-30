@@ -1,8 +1,8 @@
 # grunt-xcode [![Build Status](https://travis-ci.org/matiassingers/grunt-xcode.png?branch=master)](https://travis-ci.org/matiassingers/grunt-xcode) [![Dependency Status](https://gemnasium.com/matiassingers/grunt-xcode.png)](https://gemnasium.com/matiassingers/grunt-xcode)
-> Compile and build Xcode project with Grunt
+> Build and export Xcode projects with Grunt
 
 ## Getting Started
-This plugin requires Grunt `~0.4.2`
+This plugin requires Grunt `~0.4.5`
 
 If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
 
@@ -21,27 +21,33 @@ Not ready yet.
 
 ### Options
 
+#### clean
 
-#### gemInstall
-
-Default: `false`  
+Default: `true`
 Type: `Boolean`
 
-Force the installation of the required gem without asking the user first.
+Clean project before building
+
+#### export
+
+Default: `true`
+Type: `Boolean`
+
+Export the project after building/archiving
 
 #### workspace
 
-Default: `''`  
+Default: `''`
 Type: `String`
 
-Workspace (.xcworkspace) file to use to build app (automatically detected in current directory)
+Workspace (.xcworkspace) file to use to build app
 
 #### project
 
 Default: `''`  
 Type: `String`
 
-Project (.xcodeproj) file to use to build app (automatically detected in current directory, overridden by `workspace` option)
+Project (.xcodeproj) file to use to build app (overridden by `workspace` option)
 
 #### configuration
 
@@ -57,26 +63,28 @@ Type: `String`
 
 Scheme used to build app
 
-#### clean
 
-Default: `true`  
-Type: `Boolean`
+#### archivePath
 
-Clean project before building
-
-#### archive
-
-Default: `true`  
-Type: `Boolean`
-
-Archive project after building
-
-#### destination
-
-Default: `''`  
+Default: `''`
 Type: `String`
 
-Destination. Defaults to current directory
+Path to archive the build to (useful for saving DSYM etc.)
+If nothing is provided a temp directory will be created and removed after completion.
+
+#### exportPath
+
+Default: `process.cwd()`
+Type: `String`
+
+Path to exported IPA file. Defaults to current directory
+
+#### exportFilename
+
+Default: `export.ipa`
+Type: `String`
+
+Filename of the exported IPA file.
 
 #### provision
 
@@ -84,13 +92,6 @@ Default: `''`
 Type: `String`
 
 Sign .ipa file with .mobileprovision
-
-#### identity
-
-Default: `''`  
-Type: `String`
-
-Identity to be used along with --embed
 
 #### sdk
 
