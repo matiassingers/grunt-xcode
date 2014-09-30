@@ -33,6 +33,7 @@
     "iOS"
   ],
   "dependencies": {
-    "bluebird": "~2.3.4"
+    "bluebird": "~2.3.4",
+    "temporary": "0.0.8"
   }
 }

@@ -9,6 +9,7 @@
 
 var Promise = require('bluebird');
 var exec = Promise.promisify(require('child_process').exec);
+var temporary = require('temporary');
 
 String.prototype.format = function() {
     var formatted = this;
@@ -48,5 +49,9 @@ module.exports = function(grunt) {
       throw new Error('`options.project` is required');
     }
 
+    if(!options.archivePath){
+      var temporaryDirectory = new temporary.Dir();
+      options.archivePath = temporaryDirectory.path;
+    }
   });
 };
