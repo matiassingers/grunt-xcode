@@ -20,6 +20,17 @@ String.prototype.format = function() {
 };
 
 module.exports = function(grunt) {
+  function executeCommand(command){
+    grunt.verbose.writeln('Running command: {0}'.format(command));
+    return exec(command)
+      .catch(handleCommandError);
+  }
+  function handleCommandError(error){
+    if (error){
+      grunt.warn(error);
+    }
+  }
+
   grunt.registerMultiTask('xcode', 'Build and export Xcode projects with Grunt', function() {
     var done = this.async();
 
