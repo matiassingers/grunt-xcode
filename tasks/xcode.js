@@ -34,7 +34,19 @@ module.exports = function(grunt) {
   grunt.registerMultiTask('xcode', 'Build and export Xcode projects with Grunt', function() {
     var done = this.async();
 
+    var options = this.options({
+      clean: true,
+      export: true,
+      project: '',
+      scheme: '',
+      archivePath: '',
+      exportPath: process.cwd(),
+      exportFilename: 'export.ipa'
+    });
 
+    if(!options.project){
+      throw new Error('`options.project` is required');
+    }
 
   });
 };
