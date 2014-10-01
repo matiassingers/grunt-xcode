@@ -35,13 +35,6 @@ Type: `Boolean`
 
 Export the project after building/archiving
 
-#### workspace
-
-Default: `''`
-Type: `String`
-
-Workspace (.xcworkspace) file to use to build app
-
 #### project
 
 Default: `''`  
@@ -55,6 +48,13 @@ Default: `''`
 Type: `String`
 
 Configuration used to build('Debug' or 'Release' in most projects)
+
+#### workspace
+
+Default: `''`
+Type: `String`
+
+Workspace (.xcworkspace) file to use to build app, `scheme` must be passed along with `workspace`
 
 #### scheme
 

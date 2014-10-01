@@ -39,6 +39,7 @@ module.exports = function(grunt) {
       clean: true,
       export: true,
       project: '',
+      workspace: '',
       scheme: '',
       archivePath: '',
       exportFormat: 'IPA',
@@ -51,6 +52,10 @@ module.exports = function(grunt) {
 
     if(!options.project){
       throw new Error('`options.project` is required');
+    }
+
+    if(options.workspace && !options.scheme){
+      throw new Error('`options.scheme` is required when building a workspace');
     }
 
     if(!options.archivePath){
@@ -81,8 +86,10 @@ module.exports = function(grunt) {
 
       var command = ['xcodebuild archive'];
       command.push('-project "{0}"'.format(options.project));
-      command.push('-scheme "{0}"'.format(options.scheme));
       command.push('-archivePath "{0}"'.format(options.archivePath));
+
+      if(options.workspace) command.push('-workspace', options.workspace);
+      if(options.scheme) command.push('-scheme', options.scheme);
 
       return executeCommand(command.join(' '))
         .then(function(){
