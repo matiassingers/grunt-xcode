@@ -23,7 +23,7 @@ grunt.registerTask('default', ['xcode']);
 ```
 
 ## Examples
-Coming soon.
+*Coming soon.*
 
 ## Options
                               | default         | type      | description
