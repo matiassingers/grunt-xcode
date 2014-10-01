@@ -43,7 +43,10 @@ module.exports = function(grunt) {
       archivePath: '',
       exportFormat: 'IPA',
       exportPath: process.cwd(),
-      exportFilename: 'export.ipa'
+      exportFilename: 'export.ipa',
+      exportProvisioningProfile: '',
+      exportSigningIdentity: '',
+      exportInstallerIdentity: ''
     });
 
     if(!options.project){
@@ -99,6 +102,10 @@ module.exports = function(grunt) {
       command.push('-exportPath "{0}/{1}"'.format(options.exportPath, options.exportFilename));
 
       command.push('-exportFormat', options.exportFormat);
+
+      if(options.exportProvisioningProfile) command.push('-exportProvisioningProfile', options.exportProvisioningProfile);
+      if(options.exportSigningIdentity) command.push('-exportSigningIdentity', options.exportSigningIdentity);
+      if(options.exportInstallerIdentity) command.push('-exportInstallerIdentity', options.exportInstallerIdentity);
 
       command.push('-exportWithOriginalSigningIdentity');
 

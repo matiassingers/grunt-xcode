@@ -93,16 +93,34 @@ Type: `String`
 
 Filename of the exported IPA file.
 
-#### provision
+#### exportProvisioningProfile
+
+Default: `''`
+Type: `String`
+
+Profilename of the provisioning profile to be used when exporting the archive.
+
+#### exportSigningIdentity
+
+Default: `''`
+Type: `String`
+
+Identityname of the application signing identity to be used when exporting the archive. If possible, this may be inferred from `exportProvisioningProfile`
+
+#### exportInstallerIdentity
+
+Default: `''`
+Type: `String`
+
+Identityname of the installer signing identity to be used when exporting the archive. If possible, this may be inferred from `exportProvisioningProfile` or `exportSigningIdentity`
+
 
 Default: `''`  
 Type: `String`
 
-Sign .ipa file with .mobileprovision
 
 #### sdk
 
-Default: `''`  
 Type: `String`
 
 use SDK as the name or path of the base SDK when building the project
