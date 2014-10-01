@@ -117,8 +117,6 @@ module.exports = function(grunt) {
 
       var command = ['xcodebuild'];
       command.push('-exportArchive');
-      command.push('-exportFormat ipa');
-      command.push('-project "{0}"'.format(options.project));
       command.push('-archivePath "{0}.xcarchive"'.format(options.archivePath));
       command.push('-exportPath "{0}/{1}"'.format(options.exportPath, options.exportFilename));
 
