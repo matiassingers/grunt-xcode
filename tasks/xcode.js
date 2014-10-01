@@ -106,8 +106,8 @@ module.exports = function(grunt) {
       if(options.exportProvisioningProfile) command.push('-exportProvisioningProfile', options.exportProvisioningProfile);
       if(options.exportSigningIdentity) command.push('-exportSigningIdentity', options.exportSigningIdentity);
       if(options.exportInstallerIdentity) command.push('-exportInstallerIdentity', options.exportInstallerIdentity);
-
-      command.push('-exportWithOriginalSigningIdentity');
+      
+      if(!options.exportSigningIdentity) command.push('-exportWithOriginalSigningIdentity');
 
       executeCommand(command.join(' '))
         .then(function(){

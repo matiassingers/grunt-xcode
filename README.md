@@ -105,7 +105,8 @@ Profilename of the provisioning profile to be used when exporting the archive.
 Default: `''`
 Type: `String`
 
-Identityname of the application signing identity to be used when exporting the archive. If possible, this may be inferred from `exportProvisioningProfile`
+Identityname of the application signing identity to be used when exporting the archive. If possible, this may be inferred from `exportProvisioningProfile`.
+If nothing is specified the signing identity used to create the archive will be used.
 
 #### exportInstallerIdentity
 
