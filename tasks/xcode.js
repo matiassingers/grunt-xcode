@@ -31,8 +31,16 @@ module.exports = function(grunt) {
     grunt.verbose.writeln('Command:', chalk.yellow(command));
 
     return new Promise(function(resolve, reject){
+      // poor man's progress indicator
+      var progress = setInterval(function(){
+        grunt.log.write(chalk.green('.'));
+      }, 1000);
+
       // See Sindre Sorhus' grunt-shell - https://github.com/sindresorhus/grunt-shell/blob/master/tasks/shell.js
       var cmd = exec(command, {maxBuffer: 1000*1024}, function(error){
+        clearInterval(progress);
+        grunt.log.write(' \n');
+
         if(error) {
           grunt.warn(error);
 
@@ -138,6 +146,7 @@ module.exports = function(grunt) {
         command.push('-alltargets');
       }
 
+      grunt.log.write('Archiving: ');
       return executeCommand(command)
         .then(function(){
           grunt.verbose.ok('`xcodebuild archive` was successful');
@@ -159,7 +168,8 @@ module.exports = function(grunt) {
       if(options.exportInstallerIdentity) command.push('-exportInstallerIdentity', safelyWrap(options.exportInstallerIdentity));
       if(!options.exportSigningIdentity) command.push('-exportWithOriginalSigningIdentity');
 
-      executeCommand(command)
+      grunt.log.write('Exporting: ');
+      return executeCommand(command)
         .then(function(){
           grunt.verbose.ok('`xcodebuild export` was successful');
         });
