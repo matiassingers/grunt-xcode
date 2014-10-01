@@ -48,6 +48,7 @@ Default: `''`
 Type: `String`
 
 Configuration used to build('Debug' or 'Release' in most projects)
+Available configurations for a project can be listed with `$ xcodebuild -list`
 
 #### workspace
 

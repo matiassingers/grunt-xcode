@@ -39,6 +39,7 @@ module.exports = function(grunt) {
       clean: true,
       export: true,
       project: '',
+      configuration: '',
       workspace: '',
       scheme: '',
       allTargets: true,
@@ -90,6 +91,7 @@ module.exports = function(grunt) {
       command.push('-project "{0}"'.format(options.project));
       command.push('-archivePath "{0}"'.format(options.archivePath));
 
+      if(options.configuration) command.push('-configuration', options.configuration);
       if(options.workspace) command.push('-workspace', options.workspace);
       if(options.scheme) command.push('-scheme', options.scheme);
 
