@@ -40,7 +40,7 @@ Export the project after building/archiving
 Default: `''`  
 Type: `String`
 
-Project (.xcodeproj) file to use to build app (overridden by `workspace` option)
+Project (.xcodeproj) file to use to build app
 
 #### configuration
 
@@ -130,16 +130,20 @@ Type: `String`
 
 Identityname of the installer signing identity to be used when exporting the archive. If possible, this may be inferred from `exportProvisioningProfile` or `exportSigningIdentity`
 
+#### arch
 
 Default: `''`  
 Type: `String`
 
+Build with specified architecture
 
 #### sdk
 
+Default: `''`
 Type: `String`
 
-use SDK as the name or path of the base SDK when building the project
+Passed as `[<sdkfullpath> | <sdkname>]` when building the project
+Available SDKs can be listed with `$ xcodebuild -showsdks`
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).

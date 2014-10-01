@@ -54,7 +54,9 @@ module.exports = function(grunt) {
       exportFilename: 'export.ipa',
       exportProvisioningProfile: '',
       exportSigningIdentity: '',
-      exportInstallerIdentity: ''
+      exportInstallerIdentity: '',
+      arch: '',
+      sdk: ''
     });
 
     if(!options.project && !options.workspace){
@@ -98,6 +100,9 @@ module.exports = function(grunt) {
       if(options.configuration) command.push('-configuration', safelyWrap(options.configuration));
       if(options.workspace) command.push('-workspace', safelyWrap(options.workspace));
       if(options.scheme) command.push('-scheme', safelyWrap(options.scheme));
+
+      if(options.arch) command.push('-arch', safelyWrap(options.arch));
+      if(options.sdk) command.push('-sdk', safelyWrap(options.sdk));
 
       if(options.target){
         command.push('-target', safelyWrap(options.target));
