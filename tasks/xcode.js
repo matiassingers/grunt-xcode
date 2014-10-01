@@ -20,6 +20,10 @@ String.prototype.format = function() {
     return formatted;
 };
 
+function safelyWrap(string){
+  return JSON.stringify(string);
+}
+
 module.exports = function(grunt) {
   function executeCommand(command){
     grunt.verbose.writeln('Running command: {0}'.format(command));
@@ -89,15 +93,15 @@ module.exports = function(grunt) {
 
       var command = ['xcodebuild archive'];
       command.push('-project "{0}"'.format(options.project));
-      command.push('-archivePath "{0}"'.format(options.archivePath));
+      command.push('-archivePath', safelyWrap(options.archivePath));
 
-      if(options.configuration) command.push('-configuration', options.configuration);
-      if(options.workspace) command.push('-workspace', options.workspace);
-      if(options.scheme) command.push('-scheme', options.scheme);
+      if(options.configuration) command.push('-configuration', safelyWrap(options.configuration));
+      if(options.workspace) command.push('-workspace', safelyWrap(options.workspace));
+      if(options.scheme) command.push('-scheme', safelyWrap(options.scheme));
 
       if(options.target){
-        command.push('-target', options.target);
-      } else if(options.allTargets) {
+        command.push('-target', safelyWrap(options.target));
+      } else if(options.allTargets && !options.scheme) {
         command.push('-alltargets');
       }
 
@@ -120,10 +124,9 @@ module.exports = function(grunt) {
 
       command.push('-exportFormat', options.exportFormat);
 
-      if(options.exportProvisioningProfile) command.push('-exportProvisioningProfile', options.exportProvisioningProfile);
-      if(options.exportSigningIdentity) command.push('-exportSigningIdentity', options.exportSigningIdentity);
-      if(options.exportInstallerIdentity) command.push('-exportInstallerIdentity', options.exportInstallerIdentity);
-      
+      if(options.exportProvisioningProfile) command.push('-exportProvisioningProfile', safelyWrap(options.exportProvisioningProfile));
+      if(options.exportSigningIdentity) command.push('-exportSigningIdentity', safelyWrap(options.exportSigningIdentity));
+      if(options.exportInstallerIdentity) command.push('-exportInstallerIdentity', safelyWrap(options.exportInstallerIdentity));
       if(!options.exportSigningIdentity) command.push('-exportWithOriginalSigningIdentity');
 
       executeCommand(command.join(' '))
