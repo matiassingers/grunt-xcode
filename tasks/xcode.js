@@ -92,9 +92,9 @@ module.exports = function(grunt) {
       }
 
       var command = ['xcodebuild archive'];
-      command.push('-project "{0}"'.format(options.project));
       command.push('-archivePath', safelyWrap(options.archivePath));
 
+      if(options.project) command.push('-project', safelyWrap(options.project));
       if(options.configuration) command.push('-configuration', safelyWrap(options.configuration));
       if(options.workspace) command.push('-workspace', safelyWrap(options.workspace));
       if(options.scheme) command.push('-scheme', safelyWrap(options.scheme));
