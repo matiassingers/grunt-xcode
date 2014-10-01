@@ -23,14 +23,14 @@ Not ready yet.
 
 #### clean
 
-Default: `true`
+Default: `true`  
 Type: `Boolean`
 
 Clean project before building
 
 #### export
 
-Default: `true`
+Default: `true`  
 Type: `Boolean`
 
 Export the project after building/archiving
@@ -52,7 +52,7 @@ Available configurations for a project can be listed with `$ xcodebuild -list`
 
 #### workspace
 
-Default: `''`
+Default: `''`  
 Type: `String`
 
 Workspace (.xcworkspace) file to use to build app, `scheme` must be passed along with `workspace`
@@ -66,14 +66,14 @@ Scheme used to build app
 
 #### allTargets
 
-Default `true`
+Default `true`  
 Type: `Boolean`
 
 Will by default build all targets in project. If `allTargets` is false and no `target` option is passed, the first available target will be built.
 
 #### target
 
-Default: `''`
+Default: `''`  
 Type: `String`
 
 Build the target specified, by default will build all available targets - see `allTargets` option.
@@ -81,7 +81,7 @@ Available targets for a project can be listed with `$ xcodebuild -list`
 
 #### archivePath
 
-Default: `''`
+Default: `''`  
 Type: `String`
 
 Path to archive the build to (useful for saving DSYM etc.)
@@ -89,35 +89,35 @@ If nothing is provided a temp directory will be created and removed after comple
 
 #### exportFormat
 
-Default: `'IPA'`
+Default: `'IPA'`  
 Type: `String`
 
 Valid formats are IPA (iOS archives only), PKG (Mac archives only), and APP.
 
 #### exportPath
 
-Default: `process.cwd()`
+Default: `process.cwd()`  
 Type: `String`
 
 Path to exported IPA file. Defaults to current directory
 
 #### exportFilename
 
-Default: `export.ipa`
+Default: `export.ipa`  
 Type: `String`
 
 Filename of the exported IPA file.
 
 #### exportProvisioningProfile
 
-Default: `''`
+Default: `''`  
 Type: `String`
 
 Profilename of the provisioning profile to be used when exporting the archive.
 
 #### exportSigningIdentity
 
-Default: `''`
+Default: `''`  
 Type: `String`
 
 Identityname of the application signing identity to be used when exporting the archive. If possible, this may be inferred from `exportProvisioningProfile`.
@@ -125,7 +125,7 @@ If nothing is specified the signing identity used to create the archive will be 
 
 #### exportInstallerIdentity
 
-Default: `''`
+Default: `''`  
 Type: `String`
 
 Identityname of the installer signing identity to be used when exporting the archive. If possible, this may be inferred from `exportProvisioningProfile` or `exportSigningIdentity`
@@ -139,7 +139,7 @@ Build with specified architecture
 
 #### sdk
 
-Default: `''`
+Default: `''`  
 Type: `String`
 
 Passed as `[<sdkfullpath> | <sdkname>]` when building the project
