@@ -26,15 +26,17 @@ function safelyWrap(string){
 }
 
 module.exports = function(grunt) {
-  function executeCommand(args){
+  function executeCommand(args, silent){
     var command = 'xcodebuild ' + args.join(' ');
     grunt.verbose.writeln('Command:', chalk.yellow(command));
 
     return new Promise(function(resolve, reject){
       // poor man's progress indicator
-      var progress = setInterval(function(){
-        grunt.log.write(chalk.green('.'));
-      }, 1000);
+      if(!silent){
+        var progress = setInterval(function(){
+          grunt.log.write(chalk.green('.'));
+        }, 1000);
+      }
 
       // See Sindre Sorhus' grunt-shell - https://github.com/sindresorhus/grunt-shell/blob/master/tasks/shell.js
       var cmd = exec(command, {maxBuffer: 1000*1024}, function(error){
@@ -119,7 +121,7 @@ module.exports = function(grunt) {
       var command = ['clean'];
       if(options.project) command.push('-project', safelyWrap(options.project));
 
-      return executeCommand(command)
+      return executeCommand(command, true)
         .then(function(){
           grunt.verbose.ok('`xcodebuild clean` was successful');
         });
