@@ -21,129 +21,26 @@ Not ready yet.
 
 ### Options
 
-#### clean
+                              | default         | type      | description
+----------------------------- | --------------- | --------- | ------------
+**clean**                     | `true`          | `Boolean` | *Clean project before building*
+**export**                    | `true`          | `Boolean` | *Export the project after building/archiving*
+**project**                   | `''`            | `String`  | *Project (.xcodeproj) file to use to build app*
+**configuration**             | `''`            | `String`  | *Configuration used to build('Debug' or 'Release' in most projects)<br>Available configurations for a project can be listed with `$ xcodebuild -list`*
+**workspace**                 | `''`            | `String`  | *Workspace (.xcworkspace) file to use to build app, `scheme` must be passed along with `workspace`*
+**scheme**                    | `''`            | `String`  | *Scheme used to build app*
+**allTargets**                | `true`          | `Boolean` | *Will by default build all targets in project.<br>If `allTargets` is false and no `target` option is passed, the first available target will be built.*
+**target**                    | `''`            | `String`  | *Build the target specified, by default will build all available targets - see `allTargets` option.<br>Available targets for a project can be listed with `$ xcodebuild -list`*
+**archivePath**               | `''`            | `String`  | *Path to archive the build to (useful for saving DSYM etc.)<br>If nothing is provided a temp directory will be created and removed after completion.*
+**exportFormat**              | `'IPA'`         | `String`  | *Valid formats are IPA (iOS archives only), PKG (Mac archives only), and APP.*
+**exportPath**                | `process.cwd()` | `String`  | *Path to exported IPA file. Defaults to current directory*
+**exportFilename**            | `'export.ipa'`  | `String`  | *Filename of the exported IPA file.*
+**exportProvisioningProfile** | `''`            | `String`  | *Profilename of the provisioning profile to be used when exporting the archive.*
+**exportSigningIdentity**     | `''`            | `String`  | *Identityname of the application signing identity to be used when exporting the archive.<br>If possible, this may be inferred from `exportProvisioningProfile`.<br>If nothing is specified the signing identity used to create the archive will be used.*
+**exportInstallerIdentity**   | `''`            | `String`  | *Identityname of the installer signing identity to be used when exporting the archive.<br>If possible, this may be inferred from `exportProvisioningProfile` or `exportSigningIdentity`*
+**arch**                      | `''`            | `String`  | *Build with specified architecture*
+**sdk**                       | `''`            | `String`  | *Passed as `[<sdkfullpath> | <sdkname>]` when building the project<br>Available SDKs can be listed with `$ xcodebuild -showsdks`*
 
-Default: `true`  
-Type: `Boolean`
-
-Clean project before building
-
-#### export
-
-Default: `true`  
-Type: `Boolean`
-
-Export the project after building/archiving
-
-#### project
-
-Default: `''`  
-Type: `String`
-
-Project (.xcodeproj) file to use to build app
-
-#### configuration
-
-Default: `''`  
-Type: `String`
-
-Configuration used to build('Debug' or 'Release' in most projects)
-Available configurations for a project can be listed with `$ xcodebuild -list`
-
-#### workspace
-
-Default: `''`  
-Type: `String`
-
-Workspace (.xcworkspace) file to use to build app, `scheme` must be passed along with `workspace`
-
-#### scheme
-
-Default: `''`  
-Type: `String`
-
-Scheme used to build app
-
-#### allTargets
-
-Default `true`  
-Type: `Boolean`
-
-Will by default build all targets in project. If `allTargets` is false and no `target` option is passed, the first available target will be built.
-
-#### target
-
-Default: `''`  
-Type: `String`
-
-Build the target specified, by default will build all available targets - see `allTargets` option.
-Available targets for a project can be listed with `$ xcodebuild -list`
-
-#### archivePath
-
-Default: `''`  
-Type: `String`
-
-Path to archive the build to (useful for saving DSYM etc.)
-If nothing is provided a temp directory will be created and removed after completion.
-
-#### exportFormat
-
-Default: `'IPA'`  
-Type: `String`
-
-Valid formats are IPA (iOS archives only), PKG (Mac archives only), and APP.
-
-#### exportPath
-
-Default: `process.cwd()`  
-Type: `String`
-
-Path to exported IPA file. Defaults to current directory
-
-#### exportFilename
-
-Default: `export.ipa`  
-Type: `String`
-
-Filename of the exported IPA file.
-
-#### exportProvisioningProfile
-
-Default: `''`  
-Type: `String`
-
-Profilename of the provisioning profile to be used when exporting the archive.
-
-#### exportSigningIdentity
-
-Default: `''`  
-Type: `String`
-
-Identityname of the application signing identity to be used when exporting the archive. If possible, this may be inferred from `exportProvisioningProfile`.
-If nothing is specified the signing identity used to create the archive will be used.
-
-#### exportInstallerIdentity
-
-Default: `''`  
-Type: `String`
-
-Identityname of the installer signing identity to be used when exporting the archive. If possible, this may be inferred from `exportProvisioningProfile` or `exportSigningIdentity`
-
-#### arch
-
-Default: `''`  
-Type: `String`
-
-Build with specified architecture
-
-#### sdk
-
-Default: `''`  
-Type: `String`
-
-Passed as `[<sdkfullpath> | <sdkname>]` when building the project
-Available SDKs can be listed with `$ xcodebuild -showsdks`
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
