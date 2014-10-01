@@ -10,6 +10,7 @@
 var Promise = require('bluebird');
 var exec = Promise.promisify(require('child_process').exec);
 var temporary = require('temporary');
+var chalk = require('chalk');
 
 String.prototype.format = function() {
     var formatted = this;
