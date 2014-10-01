@@ -41,6 +41,8 @@ module.exports = function(grunt) {
       project: '',
       workspace: '',
       scheme: '',
+      allTargets: true,
+      target: '',
       archivePath: '',
       exportFormat: 'IPA',
       exportPath: process.cwd(),
@@ -90,6 +92,12 @@ module.exports = function(grunt) {
 
       if(options.workspace) command.push('-workspace', options.workspace);
       if(options.scheme) command.push('-scheme', options.scheme);
+
+      if(options.target){
+        command.push('-target', options.target);
+      } else if(options.allTargets) {
+        command.push('-alltargets');
+      }
 
       return executeCommand(command.join(' '))
         .then(function(){

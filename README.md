@@ -63,6 +63,20 @@ Type: `String`
 
 Scheme used to build app
 
+#### allTargets
+
+Default `true`
+Type: `Boolean`
+
+Will by default build all targets in project. If `allTargets` is false and no `target` option is passed, the first available target will be built.
+
+#### target
+
+Default: `''`
+Type: `String`
+
+Build the target specified, by default will build all available targets - see `allTargets` option.
+Available targets for a project can be listed with `$ xcodebuild -list`
 
 #### archivePath
 
