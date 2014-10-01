@@ -57,8 +57,8 @@ module.exports = function(grunt) {
       exportInstallerIdentity: ''
     });
 
-    if(!options.project){
-      throw new Error('`options.project` is required');
+    if(!options.project && !options.workspace){
+      throw new Error('`options.project` or `options.workspace` is required');
     }
 
     if(options.workspace && !options.scheme){
