@@ -41,6 +41,7 @@ module.exports = function(grunt) {
       project: '',
       scheme: '',
       archivePath: '',
+      exportFormat: 'IPA',
       exportPath: process.cwd(),
       exportFilename: 'export.ipa'
     });
@@ -96,6 +97,9 @@ module.exports = function(grunt) {
       command.push('-project "{0}"'.format(options.project));
       command.push('-archivePath "{0}.xcarchive"'.format(options.archivePath));
       command.push('-exportPath "{0}/{1}"'.format(options.exportPath, options.exportFilename));
+
+      command.push('-exportFormat', options.exportFormat);
+
       command.push('-exportWithOriginalSigningIdentity');
 
       executeCommand(command.join(' '))

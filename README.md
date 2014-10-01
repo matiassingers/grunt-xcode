@@ -72,6 +72,13 @@ Type: `String`
 Path to archive the build to (useful for saving DSYM etc.)
 If nothing is provided a temp directory will be created and removed after completion.
 
+#### exportFormat
+
+Default: `'IPA'`
+Type: `String`
+
+Valid formats are IPA (iOS archives only), PKG (Mac archives only), and APP.
+
 #### exportPath
 
 Default: `process.cwd()`
