@@ -23,3 +23,7 @@ Icon
 node_modules
 npm-debug.log
 tmp
+
+# Xcode builds
+*.ipa
+tests/grunt-xcode/build/
