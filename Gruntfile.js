@@ -13,12 +13,19 @@ module.exports = function(grunt) {
   // Project configuration.
   grunt.initConfig({
     xcode: {
-      default: {
+      test: {
         options: {
-          project: './xcode/test.xcodeproj',
-          scheme: 'Test'
+          project: 'test/grunt-xcode/grunt-xcode.xcodeproj',
+          scheme: 'grunt-xcode',
+          exportPath: 'test'
         }
       }
+    },
+    nodeunit: {
+      tasks: ['test/test.js']
+    },
+    clean: {
+      test: ['test/export.ipa']
     }
   });
 
@@ -29,9 +36,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-nodeunit');
 
-  // Whenever the "test" task is run, first clean the "tmp" dir, then run this
+  // Whenever the "test" task is run, first clean the "test" dir, then run this
   // plugin's task(s), then test the result.
-  grunt.registerTask('test', ['xcode']);
+  grunt.registerTask('test', ['clean', 'xcode', 'nodeunit', 'clean']);
 
   // By default, lint and run all tests.
   grunt.registerTask('default', ['test']);
