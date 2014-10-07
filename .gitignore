@@ -26,4 +26,4 @@ tmp
 
 # Xcode builds
 *.ipa
-tests/grunt-xcode/build/
+test/grunt-xcode/build/
