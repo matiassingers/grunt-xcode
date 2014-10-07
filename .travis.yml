@@ -1,6 +1,6 @@
 os:
   - osx
-language: node_js
+language: objective-c
 node_js:
   - "0.11"
   - "0.10"
