@@ -25,5 +25,4 @@ npm-debug.log
 tmp
 
 # Xcode builds
-*.ipa
 test/grunt-xcode/build/
