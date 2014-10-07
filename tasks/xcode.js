@@ -8,6 +8,7 @@
 'use strict';
 
 var Promise = require('bluebird');
+var which = require('which');
 var temporary = require('temporary');
 var chalk = require('chalk');
 var exec = require('child_process').exec;
@@ -93,6 +94,12 @@ module.exports = function(grunt) {
       exportInstallerIdentity: '',
       arch: '',
       sdk: ''
+    });
+
+    which('xcodebuild', function(err, path){
+      if(err || !path){
+        throw new Error('`xcodebuild` command is required for grunt-xcode to work, please install Xcode Tools from developer.apple.com');
+      }
     });
 
     if(!options.project && !options.workspace){

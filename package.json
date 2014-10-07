@@ -14,7 +14,7 @@
   "licenses": "MIT",
   "main": "Gruntfile.js",
   "engines": {
-    "node": ">= 0.8.0"
+    "node": ">= 0.10.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 0"
@@ -35,6 +35,7 @@
   "dependencies": {
     "bluebird": "~2.3.4",
     "temporary": "0.0.8",
-    "chalk": "~0.5.1"
+    "chalk": "~0.5.1",
+    "which": "~1.0.5"
   }
 }
