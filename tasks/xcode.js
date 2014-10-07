@@ -149,6 +149,8 @@ module.exports = function(grunt) {
       if(options.arch) command.push('-arch', safelyWrap(options.arch));
       if(options.sdk) command.push('-sdk', safelyWrap(options.sdk));
 
+      if(!options.exportSigningIdentity) command.push('CODE_SIGN_IDENTITY=""', 'CODE_SIGN_ENTITLEMENTS=""', 'CODE_SIGNING_REQUIRED=NO');
+
       if(options.target){
         command.push('-target', safelyWrap(options.target));
       } else if(options.allTargets && !options.scheme) {
