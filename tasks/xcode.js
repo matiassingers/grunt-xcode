@@ -117,7 +117,7 @@ module.exports = function(grunt) {
 
     runCleanCommand()
       .then(runArchiveCommand)
-      .then(runSigningCommand)
+      .then(chooseExportCommand)
       .finally(cleanUp);
 
     function runCleanCommand(){
@@ -162,6 +162,13 @@ module.exports = function(grunt) {
         .then(function(){
           grunt.verbose.ok('`xcodebuild archive` was successful');
         });
+    }
+    function chooseExportCommand(){
+      if(options.exportSigningIdentity){
+        return runSigningCommand();
+      }
+
+      return runExportCommand();
     }
     function runExportCommand(){
       if(!options.export) {
