@@ -33,7 +33,7 @@ module.exports = function(grunt) {
 
     return new Promise(function(resolve, reject){
       // poor man's progress indicator
-      if(!silent){
+      if(!silent && !grunt.option('verbose')){
         var progress = setInterval(function(){
           grunt.log.write(chalk.green('.'));
         }, 1000);
@@ -62,12 +62,8 @@ module.exports = function(grunt) {
           child.pipe(output);
         }
       };
-
       if (grunt.option('verbose')) {
         captureOutput(cmd.stdout, process.stdout);
-      }
-
-      if (grunt.option('verbose')) {
         captureOutput(cmd.stderr, process.stderr);
       }
     });
