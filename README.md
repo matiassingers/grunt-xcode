@@ -48,6 +48,11 @@ grunt.registerTask('default', ['xcode']);
 **arch**                      | `''`            | `String`  | *Build with specified architecture*
 **sdk**                       | `''`            | `String`  | *Passed as `[<sdkfullpath> | <sdkname>]` when building the project<br>Available SDKs can be listed with `$ xcodebuild -showsdks`*
 
+## Common errors
+
+#### `Warning: --resource-rules has been deprecated in Mac OS X >= 10.10!`
+Basically just add `$(SDKROOT)/ResourceRules.plist` to your Xcode projects' "Code Signing Resource Rules Path"/`CODE_SIGN_RESOURCE_RULES_PATH`.
+See [this answer](http://stackoverflow.com/a/7919137) on StackOverflow for more details.
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
