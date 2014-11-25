@@ -90,7 +90,7 @@ module.exports = function(grunt) {
       exportSigningIdentity: '',
       exportInstallerIdentity: '',
       arch: '',
-      sdk: ''
+      sdk: 'iphoneos'
     });
 
     which('xcodebuild', function(err, path){
