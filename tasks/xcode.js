@@ -33,6 +33,7 @@ module.exports = function(grunt) {
     args.unshift(command || 'xcodebuild');
     command = args.join(' ');
     grunt.verbose.writeln('Command:', chalk.yellow(command));
+    grunt.log.debug('Command:', chalk.yellow(command));
 
     return new Promise(function(resolve, reject){
       // poor man's progress indicator
