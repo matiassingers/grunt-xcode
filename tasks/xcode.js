@@ -11,6 +11,7 @@ var Promise = require('bluebird');
 var which = require('which');
 var temporary = require('temporary');
 var chalk = require('chalk');
+var glob = require('glob');
 var exec = require('child_process').exec;
 
 String.prototype.format = function() {

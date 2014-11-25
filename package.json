@@ -21,8 +21,9 @@
   },
   "dependencies": {
     "bluebird": "~2.3.4",
-    "temporary": "0.0.8",
     "chalk": "~0.5.1",
+    "glob": "^4.2.1",
+    "temporary": "0.0.8",
     "which": "~1.0.5"
   },
   "devDependencies": {
