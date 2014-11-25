@@ -27,8 +27,9 @@ function safelyWrap(string){
 }
 
 module.exports = function(grunt) {
-  function executeCommand(args, silent){
-    var command = 'xcodebuild ' + args.join(' ');
+  function executeCommand(args, command, silent){
+    args.unshift(command || 'xcodebuild');
+    command = args.join(' ');
     grunt.verbose.writeln('Command:', chalk.yellow(command));
 
     return new Promise(function(resolve, reject){
@@ -124,7 +125,7 @@ module.exports = function(grunt) {
       var command = ['clean'];
       if(options.project) command.push('-project', safelyWrap(options.project));
 
-      return executeCommand(command, true)
+      return executeCommand(command, null, true)
         .then(function(){
           grunt.verbose.ok('`xcodebuild clean` was successful');
         });
