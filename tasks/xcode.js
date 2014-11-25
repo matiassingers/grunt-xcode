@@ -116,7 +116,7 @@ module.exports = function(grunt) {
 
     runCleanCommand()
       .then(runArchiveCommand)
-      .then(runExportCommand)
+      .then(runSigningCommand)
       .finally(cleanUp);
 
     function runCleanCommand(){
@@ -184,6 +184,29 @@ module.exports = function(grunt) {
           grunt.verbose.ok('`xcodebuild export` was successful');
         });
     }
+    function runSigningCommand(){
+      var command = [];
+      command.push('-sdk', options.sdk);
+      command.push('PackageApplication');
+
+      if (grunt.option('verbose')) {
+        command.push('-v');
+      }
+
+      var archivePath = glob.sync('{0}.xcarchive/Products/Applications/*.app'.format(options.archivePath))[0];
+      grunt.log.debug(archivePath);
+      command.push(archivePath);
+      command.push('-o "{0}/{1}"'.format(options.exportPath, options.exportFilename));
+      command.push('--sign', safelyWrap(options.exportSigningIdentity));
+      command.push('--embed', safelyWrap(options.exportProvisioningProfile));
+
+      grunt.log.write('Exporting: ');
+      return executeCommand(command, 'xcrun')
+        .then(function(){
+          grunt.verbose.ok('`xcrun PackageApplication` was successful');
+        });
+    }
+
     function cleanUp(){
       if(temporaryDirectory){
         temporaryDirectory.rmdir();
