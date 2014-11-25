@@ -23,6 +23,7 @@ String.prototype.format = function() {
 };
 
 function safelyWrap(string){
+  string = string.replace('~', process.env['HOME']);
   return JSON.stringify(string);
 }
 
