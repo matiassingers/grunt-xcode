@@ -48,6 +48,11 @@ grunt.registerTask('default', ['xcode']);
 **arch**                      | `''`            | `String`  | *Build with specified architecture*
 **sdk**                       | `''`            | `String`  | *Passed as `[<sdkfullpath> | <sdkname>]` when building the project<br>Available SDKs can be listed with `$ xcodebuild -showsdks`*
 
+## Related
+- [`apn-test`](https://github.com/matiassingers/apn-test)
+- [`ipa-metadata`](https://github.com/matiassingers/ipa-metadata)
+- [`entitlements`](https://github.com/matiassingers/entitlements)
+- [`provisioning`](https://github.com/matiassingers/provisioning)
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
