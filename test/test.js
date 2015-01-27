@@ -9,8 +9,8 @@ exports.xcode = {
     test.ok(grunt.file.exists('test/export.ipa'), 'should have exported correct .ipa file');
 
     // floor the numbers, the last couple of bytes varies too much
-    var actualSize = Math.floor(fs.statSync('test/export.ipa').size / 100);
-    var expectedSize = Math.floor(fs.statSync('test/expected/export.ipa').size / 100);
+    var actualSize = Math.floor(fs.statSync('test/export.ipa').size / 1000);
+    var expectedSize = Math.floor(fs.statSync('test/expected/export.ipa').size / 1000);
     test.equal(actualSize, expectedSize, 'should be about the same filesize');
 
     test.done();
