@@ -78,17 +78,18 @@ module.exports = function(grunt) {
 
     var options = this.options({
       clean: true,
-      export: true,
+      export: false,
+      archive: false,
       project: '',
       configuration: '',
       workspace: '',
       scheme: '',
-      allTargets: true,
+      allTargets: false,
       target: '',
       archivePath: '',
       exportFormat: 'IPA',
       exportPath: process.cwd(),
-      exportFilename: 'export.ipa',
+      exportFilename: '',
       exportProvisioningProfile: '',
       exportSigningIdentity: '',
       exportInstallerIdentity: '',
@@ -134,7 +135,7 @@ module.exports = function(grunt) {
         });
     }
     function runArchiveCommand(){
-      if(!options.export) {
+      if(!options.archive) {
         return Promise.resolve();
       }
 
