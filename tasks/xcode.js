@@ -40,7 +40,7 @@ module.exports = function(grunt) {
       }
 
       // See Sindre Sorhus' grunt-shell - https://github.com/sindresorhus/grunt-shell/blob/master/tasks/shell.js
-      var cmd = exec(command, {maxBuffer: 1000*1024}, function(error){
+      var cmd = exec(command, {maxBuffer: Infinity}, function(error){
         clearInterval(progress);
         grunt.log.write(' \n');
 
