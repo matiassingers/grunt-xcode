@@ -177,7 +177,6 @@ module.exports = function(grunt) {
       if(options.exportProvisioningProfile) command.push('-exportProvisioningProfile', safelyWrap(options.exportProvisioningProfile));
       if(options.exportSigningIdentity) command.push('-exportSigningIdentity', safelyWrap(options.exportSigningIdentity));
       if(options.exportInstallerIdentity) command.push('-exportInstallerIdentity', safelyWrap(options.exportInstallerIdentity));
-      if(!options.exportSigningIdentity) command.push('-exportWithOriginalSigningIdentity');
 
       grunt.log.write('Exporting: ');
       return executeCommand(command)
