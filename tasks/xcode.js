@@ -94,7 +94,8 @@ module.exports = function(grunt) {
       exportSigningIdentity: '',
       exportInstallerIdentity: '',
       arch: '',
-      sdk: ''
+      sdk: '',
+      bitcode: false
     });
 
     which('xcodebuild', function(err, path){
@@ -151,6 +152,7 @@ module.exports = function(grunt) {
       if(options.sdk) command.push('-sdk', safelyWrap(options.sdk));
 
       if(!options.exportSigningIdentity) command.push('CODE_SIGN_IDENTITY=""', 'CODE_SIGN_ENTITLEMENTS=""', 'CODE_SIGNING_REQUIRED=NO');
+      if(!options.bitcode) command.push('ENABLE_BITCODE=NO');
 
       if(options.target){
         command.push('-target', safelyWrap(options.target));
@@ -178,7 +180,8 @@ module.exports = function(grunt) {
       if(options.exportProvisioningProfile) command.push('-exportProvisioningProfile', safelyWrap(options.exportProvisioningProfile));
       if(options.exportSigningIdentity) command.push('-exportSigningIdentity', safelyWrap(options.exportSigningIdentity));
       if(options.exportInstallerIdentity) command.push('-exportInstallerIdentity', safelyWrap(options.exportInstallerIdentity));
-      if(options.exportWithOriginalSigningIdentity) command.push('-exportWithOriginalSigningIdentity');
+      if(options.exportWithOriginalSigningIdentity) command.push('-exportWithOriginalSigningIdentity ENABLE_BITCODE=NO');
+      if(!options.bitcode) command.push('ENABLE_BITCODE=NO');
 
       grunt.log.write('Exporting: ');
       return executeCommand(command)
