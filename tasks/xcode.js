@@ -79,6 +79,7 @@ module.exports = function(grunt) {
     var options = this.options({
       clean: true,
       export: true,
+      archive: false,
       project: '',
       configuration: '',
       workspace: '',
@@ -88,12 +89,13 @@ module.exports = function(grunt) {
       archivePath: '',
       exportFormat: 'IPA',
       exportPath: process.cwd(),
-      exportFilename: 'export.ipa',
+      exportFilename: '',
       exportProvisioningProfile: '',
       exportSigningIdentity: '',
       exportInstallerIdentity: '',
       arch: '',
-      sdk: ''
+      sdk: '',
+      bitcode: false
     });
 
     which('xcodebuild', function(err, path){
@@ -134,7 +136,7 @@ module.exports = function(grunt) {
         });
     }
     function runArchiveCommand(){
-      if(!options.export) {
+      if(!options.archive) {
         return Promise.resolve();
       }
 
@@ -150,6 +152,7 @@ module.exports = function(grunt) {
       if(options.sdk) command.push('-sdk', safelyWrap(options.sdk));
 
       if(!options.exportSigningIdentity) command.push('CODE_SIGN_IDENTITY=""', 'CODE_SIGN_ENTITLEMENTS=""', 'CODE_SIGNING_REQUIRED=NO');
+      if(!options.bitcode) command.push('ENABLE_BITCODE=NO');
 
       if(options.target){
         command.push('-target', safelyWrap(options.target));
@@ -177,7 +180,8 @@ module.exports = function(grunt) {
       if(options.exportProvisioningProfile) command.push('-exportProvisioningProfile', safelyWrap(options.exportProvisioningProfile));
       if(options.exportSigningIdentity) command.push('-exportSigningIdentity', safelyWrap(options.exportSigningIdentity));
       if(options.exportInstallerIdentity) command.push('-exportInstallerIdentity', safelyWrap(options.exportInstallerIdentity));
-      if(!options.exportSigningIdentity) command.push('-exportWithOriginalSigningIdentity');
+      if(options.exportWithOriginalSigningIdentity) command.push('-exportWithOriginalSigningIdentity');
+      if(!options.bitcode) command.push('ENABLE_BITCODE=NO');
 
       grunt.log.write('Exporting: ');
       return executeCommand(command)
