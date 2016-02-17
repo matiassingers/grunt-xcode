@@ -78,13 +78,13 @@ module.exports = function(grunt) {
 
     var options = this.options({
       clean: true,
-      export: false,
+      export: true,
       archive: false,
       project: '',
       configuration: '',
       workspace: '',
       scheme: '',
-      allTargets: false,
+      allTargets: true,
       target: '',
       archivePath: '',
       exportFormat: 'IPA',
@@ -180,7 +180,7 @@ module.exports = function(grunt) {
       if(options.exportProvisioningProfile) command.push('-exportProvisioningProfile', safelyWrap(options.exportProvisioningProfile));
       if(options.exportSigningIdentity) command.push('-exportSigningIdentity', safelyWrap(options.exportSigningIdentity));
       if(options.exportInstallerIdentity) command.push('-exportInstallerIdentity', safelyWrap(options.exportInstallerIdentity));
-      if(options.exportWithOriginalSigningIdentity) command.push('-exportWithOriginalSigningIdentity ENABLE_BITCODE=NO');
+      if(options.exportWithOriginalSigningIdentity) command.push('-exportWithOriginalSigningIdentity');
       if(!options.bitcode) command.push('ENABLE_BITCODE=NO');
 
       grunt.log.write('Exporting: ');
