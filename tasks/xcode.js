@@ -86,7 +86,7 @@ module.exports = function(grunt) {
       allTargets: true,
       target: '',
       archivePath: '',
-      exportFormat: 'IPA',
+      exportFormat: '', // e.g. IPA
       exportOptionsPlist: '', // e.g. ExportOptions.plist
       exportPath: process.cwd(),
       exportFilename: 'export.ipa',
