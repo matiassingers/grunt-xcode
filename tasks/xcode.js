@@ -86,7 +86,8 @@ module.exports = function(grunt) {
       allTargets: true,
       target: '',
       archivePath: '',
-      exportFormat: 'IPA',
+      exportFormat: '', // e.g. IPA
+      exportOptionsPlist: '', // e.g. ExportOptions.plist
       exportPath: process.cwd(),
       exportFilename: 'export.ipa',
       exportProvisioningProfile: '',
@@ -168,16 +169,20 @@ module.exports = function(grunt) {
         return Promise.resolve();
       }
 
+      if (options.exportPath) {
+        grunt.file.mkdir(options.exportPath);
+      }      
+
       var command = ['-exportArchive'];
       command.push('-archivePath "{0}.xcarchive"'.format(options.archivePath));
       command.push('-exportPath "{0}/{1}"'.format(options.exportPath, options.exportFilename));
 
-      command.push('-exportFormat', options.exportFormat);
-
+      if(options.exportFormat) command.push('-exportFormat', options.exportFormat);
+      if(options.exportOptionsPlist) command.push('-exportOptionsPlist', safelyWrap(options.exportOptionsPlist));
       if(options.exportProvisioningProfile) command.push('-exportProvisioningProfile', safelyWrap(options.exportProvisioningProfile));
       if(options.exportSigningIdentity) command.push('-exportSigningIdentity', safelyWrap(options.exportSigningIdentity));
       if(options.exportInstallerIdentity) command.push('-exportInstallerIdentity', safelyWrap(options.exportInstallerIdentity));
-      if(!options.exportSigningIdentity) command.push('-exportWithOriginalSigningIdentity');
+      if(!options.exportSigningIdentity && !options.exportProvisioningProfile && !options.exportOptionsPlist) command.push('-exportWithOriginalSigningIdentity');
 
       grunt.log.write('Exporting: ');
       return executeCommand(command)

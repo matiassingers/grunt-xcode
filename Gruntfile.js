@@ -17,7 +17,8 @@ module.exports = function(grunt) {
         options: {
           project: 'test/grunt-xcode/grunt-xcode.xcodeproj',
           scheme: 'grunt-xcode',
-          exportPath: 'test'
+          exportPath: 'test',
+          exportOptionsPlist: 'test/grunt-xcode/ExportOptions.plist'
         }
       }
     },
