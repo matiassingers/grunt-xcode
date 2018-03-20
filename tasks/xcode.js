@@ -168,6 +168,10 @@ module.exports = function(grunt) {
         return Promise.resolve();
       }
 
+      if (options.exportPath) {
+        grunt.file.mkdir(options.exportPath);
+      }      
+
       var command = ['-exportArchive'];
       command.push('-archivePath "{0}.xcarchive"'.format(options.archivePath));
       command.push('-exportPath "{0}/{1}"'.format(options.exportPath, options.exportFilename));
